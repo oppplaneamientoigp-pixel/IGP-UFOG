@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="referrer" content="no-referrer"><script src="./config.js"></script>
+<title>Dashboard de Control de Visitas</title>
+<link rel="stylesheet" href="./styles.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head><body>
+<a href="#main" class="skip">Saltar al contenido</a>
+<header><div><span class="eyebrow">GESTIÓN INSTITUCIONAL · VISITAS</span><h1>Dashboard de Control de Visitas</h1><p>Programación, carga operativa y calidad de los registros</p><small id="updated">Esperando primera lectura</small></div><button id="refresh">↻ Actualizar datos</button></header>
+<div class="notice">Información de uso interno. Contiene datos personales.</div>
+<main id="main"><section id="connection" class="panel" aria-label="Conexión de datos"></section><details class="panel filters" open><summary>Filtros de la vista</summary>
+<div id="quick" class="toolbar"></div><form id="filters"><div class="filtergrid" id="filterfields">
+<label>Fecha inicial<input name="from" type="date"></label><label>Fecha final<input name="to" type="date"></label>
+<label>Estado temporal<select name="state"><option value="">Todos</option><option>Hoy</option><option>Próxima</option><option>Fecha pasada</option><option>Sin fecha válida</option></select></label>
+<label class="search">Buscar visitante, responsable, ambiente, motivo o unidad<input name="q" type="search" maxlength="250" autocomplete="off" placeholder="Escriba para buscar…"></label>
+</div><div class="toolbar"><button type="submit">Aplicar</button><button type="button" id="clear" class="secondary">Limpiar filtros</button><button type="button" id="save" class="secondary">Guardar vista</button><button type="button" id="share" class="secondary">Copiar enlace de vista</button></div></form>
+<p class="muted">Las vistas guardadas y compartidas excluyen búsquedas, responsables y ambientes. «Fecha pasada» no confirma asistencia.</p></details>
+<div id="chips" class="toolbar" aria-label="Filtros activos"></div><div id="status" role="status" aria-live="polite"></div><button id="retry" hidden>Reintentar</button>
+<section id="dashboard" aria-label="Resumen de visitas"><div id="kpis" class="kpis skeleton"></div><div id="charts" class="charts"></div></section>
+<section class="panel"><h2>Detalle de registros</h2><p class="muted">Los datos personales se muestran únicamente en este detalle. DNI enmascarado por defecto.</p>
+<div class="toolbar"><label>Filas por página<select id="pageSize"><option>10</option><option selected>25</option><option>50</option><option>100</option></select></label><label>Orden por fecha<select id="sort"><option value="asc">Más antiguas primero</option><option value="desc">Más recientes primero</option></select></label><button id="exportFiltered" class="secondary">Exportar resultados filtrados</button></div>
+<details><summary>Columnas visibles</summary><div id="columns" class="toolbar"></div></details>
+<div id="table" class="tablewrap" tabindex="0" aria-label="Tabla de visitas"></div><div class="toolbar"><button id="prev" class="secondary">Anterior</button><span id="pagination"></span><button id="next" class="secondary">Siguiente</button></div></section>
+<section class="panel reports"><h2>Reportes</h2><div class="toolbar"><label>Tipo de reporte<select id="reportType"></select></label><label>Fecha de referencia<input type="date" id="anchor"></label><button id="generate">Generar reporte</button></div><p class="muted">Las agendas reemplazan el rango por su día, semana (lunes a domingo) o mes. Los demás filtros permanecen activos. Revise los filtros del reporte generado.</p>
+<div id="reportActions" class="toolbar" hidden><button id="csv">Descargar CSV</button><button id="print" class="secondary">Imprimir / PDF</button><button id="copy" class="secondary">Copiar resumen</button></div><article id="report"></article></section>
+</main><dialog id="modal"><div class="toolbar"><h2>Detalle de visita</h2><button id="closeModal" class="secondary">Cerrar</button></div><div id="modalbody"></div></dialog>
+<footer>Las horas son estimadas. No existe confirmación de ingreso ni de asistencia en la fuente.</footer>
+<script src="./connection.js"></script><script src="./app.js"></script>
+</body></html>
